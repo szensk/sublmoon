@@ -12,13 +12,13 @@
                 "children":
                 [
                     {
-                        "caption": "Moonscript",
+                        "caption": "Moonscripty",
                         "children":
                         [
                             {
                                 "command": "open_file", "args":
                                 {
-                                    "file": "${packages}/Moonscript/Moonscript.sublime-settings"
+                                    "file": "${packages}/Moonscripty/Moonscript.sublime-settings"
                                 },
                                 "caption": "Settings – Default"
                             },

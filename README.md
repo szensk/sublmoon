@@ -1,12 +1,12 @@
 Description
 ===========
 
-Moonscript is a package for [Sublime Text 2/3](http://www.sublimetext.com). It adds a live parser based on [LuaSublime](https://github.com/rorydriscoll/LuaSublime) to [moonscript-tmbundle](https://github.com/leafo/moonscript-tmbundle).
+Moonscripty is a package for [Sublime Text 2/3](http://www.sublimetext.com). It adds a live parser based on [LuaSublime](https://github.com/rorydriscoll/LuaSublime) to [moonscript-tmbundle](https://github.com/leafo/moonscript-tmbundle).
 
 Installation
 ============
 
-You can install this package through [Package Control](https://sublime.wbond.net/installation), simply use Command Palette: Package Control Install Package -> Moonscript.
+You can install this package through [Package Control](https://sublime.wbond.net/installation), simply use Command Palette: Package Control Install Package -> Moonscripty.
 
 Alternatively, you can install this package by running the following command in your Packages directory:
     
