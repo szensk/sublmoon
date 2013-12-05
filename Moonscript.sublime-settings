@@ -1,0 +1,6 @@
+{
+    "live_parser" : true,
+    "live_parser_style": "outline",
+    "live_parser_persistent": false,
+    "moonc_path": "moonc"
+}
