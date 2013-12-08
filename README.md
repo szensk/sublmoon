@@ -36,5 +36,15 @@ Syntax highlighting
 Command Palette: Set Syntax: Moonscript
 
 Completions
---------
+-----------
 LuaDoc tags are available in comments. For example. "@param" expands to "-- @param type name desc".
+
+Build Modes
+-----------
+* Ctrl + B: Run script with moon
+
+* Ctrl + Shift + B: Compile file with moonc
+
+* Command Palette: "moonc: show Lua" will output to the build panel.
+
+* Command Palette: "ldoc" commands generate documentation using [LDoc](https://github.com/stevedonovan/LDoc).
