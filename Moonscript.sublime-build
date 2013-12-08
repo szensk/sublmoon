@@ -1,6 +1,6 @@
 {
 	"file_regex": "^(?:(?:\t)|(?:.+: ))(.+):([0-9]+): (.*)$",
-	"selector": "source.moon",
+	"selector": "source.moonscript",
 	"cmd": ["moon", "$file_name"],
 
 	"variants": [
@@ -8,9 +8,13 @@
 			"shell": true,
 			"cmd": ["moonc", "$file_name"]
 		},
-		{   "name": "moonc: show Lua",
+		{   "name": "moonc: show output",
 			"shell": true,
 			"cmd": ["moonc", "-p", "$file_name"]
+		},
+		{   "name": "moonc: compile project",
+			"shell": true,
+			"cmd": ["moonc", "*.moon"]
 		},
 		{   "name": "ldoc: File",
 			"shell": true,
