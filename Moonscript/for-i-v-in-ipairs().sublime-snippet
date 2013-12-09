@@ -1,0 +1,7 @@
+<snippet>
+    <content><![CDATA[for ${1:i},${2:v} in ipairs(${3:table_name})
+	${0:print(i,v)}]]></content>
+    <tabTrigger>fori</tabTrigger>
+    <scope>source.moonscript</scope>
+    <description>for i,v in ipairs()</description>
+</snippet>
