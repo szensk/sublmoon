@@ -198,13 +198,6 @@
 
 		<dict>
 			<key>name</key>
-			<string>variable.language</string>
-			<key>match</key>
-			<string>\b(self)\b</string>
-		</dict>
-
-		<dict>
-			<key>name</key>
 			<string>keyword.control</string>
 			<key>match</key>
 			<string>@[a-zA-Z_]\w*\b</string>
@@ -227,7 +220,7 @@
 		
 		<dict>
 			<key>match</key>
-			<string>(?&lt;![^.]\.|:)\b(false|nil|true|_G|_VERSION|math\.(pi|huge))\b|(?&lt;![.])\.{3}(?!\.)</string>
+			<string>(?&lt;![^.]\.|:)\b(false|nil|true|_G|_VERSION|self|math\.(pi|huge))\b|(?&lt;![.])\.{3}(?!\.)</string>
 			<key>name</key>
 			<string>constant.language.lua</string>
 		</dict>
