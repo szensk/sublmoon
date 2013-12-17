@@ -12,6 +12,14 @@
 			"shell": true,
 			"cmd": ["moonc", "-p", "$file_name"]
 		},
+		{   "name": "love: run project",
+			"shell": true,
+			"cmd": ["love", "$project_path"]
+		},
+		{   "name": "love: run file",
+			"shell": true,
+			"cmd": ["love", "$file_name"]
+		},
 		{   "name": "moonc: compile project",
 			"shell": true,
 			"cmd": ["moonc", "*.moon"]
