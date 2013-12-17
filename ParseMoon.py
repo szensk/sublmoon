@@ -45,8 +45,7 @@ class ParseMoonCommand(sublime_plugin.EventListener):
 		text = view.substr(sublime.Region(0, view.size()))
 		errors = p.communicate(text.encode('utf-8'))[1]
 		result = p.wait()
-		#print(errors)
-		#luac: stdin:
+
 		# Clear out any old region markers
 		view.erase_regions('moon')
 		# Nothing to do if it parsed successfully
@@ -58,7 +57,7 @@ class ParseMoonCommand(sublime_plugin.EventListener):
 			pattern = re.compile(b'\[([0-9]+)\]')
 
 		regions = [view.full_line(view.text_point(int(match) - 1, 0)) for match in pattern.findall(errors)]
-		#view.add_regions('moon', regions, 'invalid', 'DOT', sublime.HIDDEN)
+		#if regions should save
 		persistent = 0
 		if self.settings.get("live_parser_persistent", False):
 			persistent = sublime.PERSISTENT
