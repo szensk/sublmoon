@@ -193,7 +193,7 @@
 			<key>name</key>
 			<string>keyword.control.class.ruby</string>
 			<key>match</key>
-			<string>\b(class|extends|super)\b</string>
+			<string>\b(class|extends|super|__class|__parent|__name|__inherited|__init)\b</string>
 		</dict>
 
 		<dict>
@@ -205,9 +205,16 @@
 
 		<dict>
 			<key>name</key>
-			<string>keyword.control</string>
+			<string>constant.language.self</string>
 			<key>match</key>
-			<string>@[a-zA-Z_]\w*\b</string>
+			<string>@</string>
+		</dict>
+
+		<dict>
+			<key>name</key>
+			<string>constant.language.self.class</string>
+			<key>match</key>
+			<string>@@</string>
 		</dict>
 
 		<dict>
