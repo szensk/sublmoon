@@ -205,6 +205,13 @@
 
 		<dict>
 			<key>name</key>
+			<string>variable.parameter</string>
+			<key>match</key>
+			<string>@@?[a-zA-Z_]\w*\b</string>
+		</dict>
+
+		<dict>
+			<key>name</key>
 			<string>constant.language.self</string>
 			<key>match</key>
 			<string>@</string>
