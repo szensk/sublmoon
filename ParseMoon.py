@@ -41,22 +41,25 @@ class ParseMoonCommand(sublime_plugin.EventListener):
 		# Grab the path to luac from the settings
 		moonc_path = self.settings.get("moonc_path", "moonc")
 		# Run luac with the parse option
-		p = Popen(moonc_path + ' --', stdin=PIPE, stderr=PIPE, shell=True)
+		p = Popen(moonc_path + ' --', bufsize=-1, stdin=PIPE, stderr=PIPE, shell=True)
 		text = view.substr(sublime.Region(0, view.size()))
 		errors = p.communicate(text.encode('utf-8'))[1]
-		result = p.wait()
+		errors = errors.decode("utf-8")
 
 		# Clear out any old region markers
 		view.erase_regions('moon')
 		# Nothing to do if it parsed successfully
-		if result == 0:
+		if errors == '':
+			sublime.status_message("")
 			return
+
 		# Add regions and place the error message in the status bar
 		pattern = re.compile(r'\[([0-9]+)\]')
-		if self.ST >= 3000:
-			pattern = re.compile(b'\[([0-9]+)\]')
-
 		regions = [view.full_line(view.text_point(int(match) - 1, 0)) for match in pattern.findall(errors)]
+		# Find the error message (sadly always "failed to parse")
+		pattern = re.compile(r':[0-9]+:(.*):')
+		errorstrs = pattern.search(errors).group(1).strip().split()
+		sublime.status_message(" ".join(errorstrs))
 		#if regions should save
 		persistent = 0
 		if self.settings.get("live_parser_persistent", False):
