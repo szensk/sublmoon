@@ -1,10 +1,33 @@
 import sublime
 import sublime_plugin
 import re
-from subprocess import Popen, PIPE
+import threading, subprocess
+
+#command object with timeout
+class Command(object):
+	def __init__(self, cmd, text):
+		self.cmd = cmd
+		self.text = text
+		self.process = None
+		self.result = None
+
+	def run(self, timeout):
+		def target():
+			self.process = subprocess.Popen(self.cmd, bufsize=-1, stdin=subprocess.PIPE,
+			                                stderr=subprocess.PIPE, shell=True)
+			self.result = self.process.communicate(self.text.encode('utf-8'))[1]
+
+		thread = threading.Thread(target=target)
+		thread.start()
+
+		thread.join(timeout)
+		if thread.is_alive():
+			self.process.terminate()
+			thread.join()
+
+		return self.result
 
 class ParseMoonCommand(sublime_plugin.EventListener):
-
 	TIMEOUT_MS = 200
 	ST = 3000 if sublime.version() == '' else int(sublime.version())
 
@@ -38,29 +61,34 @@ class ParseMoonCommand(sublime_plugin.EventListener):
 		self.pending = self.pending - 1
 		if self.pending > 0:
 			return
+
 		# Grab the path to luac from the settings
 		moonc_path = self.settings.get("moonc_path", "moonc")
-		# Run luac with the parse option
-		p = Popen(moonc_path + ' --', bufsize=-1, stdin=PIPE, stderr=PIPE, shell=True)
+		# Run moonc with the parse immediate option
 		text = view.substr(sublime.Region(0, view.size()))
-		errors = p.communicate(text.encode('utf-8'))[1]
-		errors = errors.decode("utf-8")
+		command = Command(moonc_path + ' --', text)
+		# Attempt to parse and grab output, bail after one second
+		errors = command.run(timeout=1)
 
-		# Clear out any old region markers
-		view.erase_regions('moon')
-		# Nothing to do if it parsed successfully
-		if errors == '':
-			sublime.status_message("")
+		if errors:
+			errors = errors.decode("utf-8")
+		else:
+			sublime.status_message('')
 			return
+
+		# Clear out any old regions
+		view.erase_regions('moon')
 
 		# Add regions and place the error message in the status bar
 		pattern = re.compile(r'\[([0-9]+)\]')
 		regions = [view.full_line(view.text_point(int(match) - 1, 0)) for match in pattern.findall(errors)]
+
 		# Find the error message (sadly always "failed to parse")
 		pattern = re.compile(r':[0-9]+:(.*):')
 		errorstrs = pattern.search(errors).group(1).strip().split()
 		sublime.status_message(" ".join(errorstrs))
-		#if regions should save
+
+		#if regions should save on shutdown
 		persistent = 0
 		if self.settings.get("live_parser_persistent", False):
 			persistent = sublime.PERSISTENT
