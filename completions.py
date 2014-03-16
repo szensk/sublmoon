@@ -10,7 +10,7 @@ class LoveCompletions(sublime_plugin.EventListener):
         old_seps = None
 
     def on_query_completions(self, view, prefix, locations):
-        if ST < 3000 and ("moonscript" in view.scope_name(locations[0])):
+        if self.ST < 3000 and ("moonscript" in view.scope_name(locations[0])):
             seps = view.settings().get("word_separators")
             if not old_seps:
                 old_seps = seps
