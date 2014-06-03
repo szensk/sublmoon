@@ -28,7 +28,7 @@ class Command(object):
 		return self.result
 
 class ParseMoonCommand(sublime_plugin.EventListener):
-	TIMEOUT_MS = 200
+	TIMEOUT_MS = 800
 	ST = 3000 if sublime.version() == '' else int(sublime.version())
 
 	def __init__(self):
@@ -70,14 +70,14 @@ class ParseMoonCommand(sublime_plugin.EventListener):
 		# Attempt to parse and grab output, bail after one second
 		errors = command.run(timeout=1)
 
+		# Clear out any old regions
+		view.erase_regions('moon')
+
 		if errors:
 			errors = errors.decode("utf-8")
 		else:
 			sublime.status_message('')
 			return
-
-		# Clear out any old regions
-		view.erase_regions('moon')
 
 		# Add regions and place the error message in the status bar
 		pattern = re.compile(r'\[([0-9]+)\]')
