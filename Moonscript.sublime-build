@@ -1,5 +1,5 @@
 {
-	"file_regex": "^(.*?\\.moon(?:script)?)\\t",
+	"file_regex": "^(.*?\\.moon)\\t",
 	"line_regex": "^\\s*\\[(\\d+)\\]",
 	"selector": "source.moonscript",
 	"cmd": ["moonc", "$file_name"],
@@ -28,7 +28,7 @@
 		{   "name": "moonc: run lint on file",
 			"shell": true,
 			"cmd": ["moonc", "-l", "$file_name"],
-			"file_regex": "^(.*?\\.moon(?:script)?)$",
+			"file_regex": "^(.*?\\.moon)$",
 			"line_regex": "^line (\\d+)"
 		},
 		{   "name": "moonc: run lint on project",
