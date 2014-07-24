@@ -1,12 +1,12 @@
 {
 	"file_regex": "^(?:(?:\t)|(?:.+: ))(.+):([0-9]+): (.*)$",
 	"selector": "source.moonscript",
-	"cmd": ["moon", "$file_name"],
+	"cmd": ["moonc", "$file_name"],
 
 	"variants": [
 		{   "name": "Run",
 			"shell": true,
-			"cmd": ["moonc", "$file_name"]
+			"cmd": ["moon", "$file_name"]
 		},
 		{   "name": "moonc: show output",
 			"shell": true,
